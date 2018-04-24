@@ -30,7 +30,7 @@ top_freq_count = 3
 alpha = 50 / number_of_topics
 eta = 0.1
 
-
+directory = '../data/20newsgroups/'
 
 class Model:
     '''The built model structure'''
@@ -70,7 +70,7 @@ def lda(max_iterations, burn_in, lag):
     for doc in range(number_of_documents):
         # print(doc)
         topics = []
-        filename = '../data/20newsgroups/' + str(doc + 1)
+        filename = directory + '/' + str(doc + 1)
         # filename = '../data/artificial/' + str(doc + 1)
         string = open(filename, 'r').read().replace('\n', '')
 
@@ -202,13 +202,14 @@ def lda(max_iterations, burn_in, lag):
     return record
 
 
-def set_params(m, b, l, a, e, t, f):
+def set_params(d, m, b, l, a, e, t, f):
     # print(m, b, l, a, e, t, f)
-    global alpha, eta, number_of_topics, top_freq_count
+    global alpha, eta, number_of_topics, top_freq_count, directory
     alpha = a/t
     eta = e
     number_of_topics = t
     top_freq_count = f
+    directory = d
     return lda(m, b, l)
     # return
 
